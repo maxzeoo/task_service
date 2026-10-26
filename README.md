@@ -8,7 +8,7 @@
 .\.venv\Scripts\python.exe -c "import fastapi, uvicorn; print('fastapi', fastapi.__version__); print('uvicorn', uvicorn.__version__)"
 # 期望相似输出
 fastapi 0.162.0
-uvicorn 0.54.
+uvicorn 0.54.0
 ```
 # 启动
 ```
@@ -24,7 +24,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 # 检验
 ```
 # 另开窗口输入
-curl http://127.0.0.1:8000
+curl.exe http://127.0.0.1:8000
 # 期望相似输出
 {"ok":true}
 # 第一个窗口输出
