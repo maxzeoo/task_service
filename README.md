@@ -33,7 +33,7 @@ INFO:     127.0.0.1:59059 - "GET / HTTP/1.1" 200 OK
 
 # 停止服务
 ```
-# 在第一个仓库按 CTRL+c，输出
+# 在第一个窗口按 CTRL+c，输出
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
