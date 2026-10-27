@@ -47,8 +47,11 @@ with open(file_path,encoding="utf-8") as f:
 
         if ok:
             count+=1
+            print(f"第{all_count}条成功")
+            print(req.text)
         else:
             print(f"第{all_count}条失败，期望：{exp}，实际：{code}")
+            print(req.text)
     print(f"通过 {count}/{all_count}")
 
 
