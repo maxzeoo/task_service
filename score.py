@@ -31,11 +31,12 @@ with open(file_path,encoding="utf-8") as f:
         zero=0
         error=0
 
-        for t in r["tasks"]:
-            if "无" in t["地点"] and "无" in t["对象"]:
-                zero+=1
-            if not set(t.keys())=={"顺序","地点","对象","内容"}:
-                error+=1
+        if "tasks" in r:
+            for t in r["tasks"]:
+                if  t["地点"]=="无" and t["对象"]=="无":
+                    zero+=1
+                if not set(t.keys())=={"顺序","地点","对象","内容"}:
+                    error+=1
 
         if exp=="400":
             ok =(code==400)
