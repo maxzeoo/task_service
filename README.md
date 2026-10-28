@@ -41,3 +41,5 @@ INFO:     Finished server process [36364]
 ## 已知局限
 - golden #4「去机房看一下热不热」单条实测 6/6 被拒；当前成绩是 9/10，不是 10/10
 - 「口语化指代」的口径未定；扩到 50 条时单列一类，暂不并入主集
+公网演示地址（serveo 临时隧道，已失效）：https://xxxx-xxxx-183-x-x-x.serveousercontent.com
+注：免费版需先点 Continue to Site 跳过拦截页；重启隧道地址会变；长请求（/tasks，约十几秒）会因隧道超时返回 502。
