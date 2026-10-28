@@ -48,7 +48,7 @@ def check(raw: str) -> dict:
     #检查 JSON 格式是否正确
     except json.JSONDecodeError:
         print(orig)
-        raise KeyError('不是json格式')
+        raise 
     if 'tasks'  in d:
         if not isinstance(d['tasks'],list) :
             raise ValueError('tasks不是列表')
@@ -65,7 +65,7 @@ def check(raw: str) -> dict:
             if not row["内容"].startswith(tuple(ACTIONS)):
                 raise ValueError(f"内容值不正确：{row['内容']},必须以白名单的某个动词:{', '.join(ACTIONS[:3])}开头")
     elif 'refuse' in d:
-        raise KeyError(f'错误原因：{d['refuse']}')
+        raise KeyError(f'错误原因：{d["refuse"]}')
     else:
         raise KeyError(f'模型给的是{list(d)}')
     return d
