@@ -50,3 +50,7 @@ INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
 INFO:     Finished server process [36364]
 ```
+
+## 已知局限
+- golden #4「去机房看一下热不热」单条实测 6/6 被拒；当前成绩是 9/10，不是 10/10
+- 「口语化指代」的口径未定；扩到 50 条时单列一类，暂不并入主集
