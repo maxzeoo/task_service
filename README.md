@@ -1,28 +1,15 @@
 # task_service
 需要 Python 3.11+，以下命令都在本项目根目录（含 main.py 的目录）执行
 
-## 新建环境
 
+## 本地运行（三步）
 ```
-# 在该目录下新建环境
+#前提：Python 3.11+，首次 clone 后先建环境（下面命令都在项目根目录执行）
 python -m venv .venv
-# 建完目录下会多出 .venv，后面命令都用
-.\.venv\Scripts\python.exe
-```
-
-## 安装依赖
-```
-# 安装 fastapi uvicorn
+# 安装依赖
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-# 检验版本
-.\.venv\Scripts\python.exe -c "import fastapi, uvicorn; print('fastapi', fastapi.__version__); print('uvicorn', uvicorn.__version__)"
-# 期望相似输出
-fastapi 0.162.0
-uvicorn 0.54.0
-```
-
-## 启动
-```
+# 设置key，这是临时设置，只对当前窗口有效；不要写进任何文件，也不要提交。
+$env:DEEPSEEK_API_KEY = "sk-换成你自己的key"
 # 以特定端口打开main.py
 .\.venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8000
 # 期望相似输出
