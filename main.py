@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+
 from fastapi.responses import JSONResponse
 from step1_task_json import build_messages, check,ask,VAR
 import os
@@ -40,13 +40,6 @@ def make_tasks(body:dict,background: BackgroundTasks):
     results[tid] = {"task_id": tid, "status": "pending"}
     background.add_task(run_task, tid, t)
     return JSONResponse(status_code=202, content={"task_id": tid, "status": "pending"})
-    # try:
-    #     raw=ask(client, build_messages(t))
-    #     back=check(raw)
-        
-    # except Exception as e:
-    #     return JSONResponse(status_code=400, content={"error": type(e).__name__,"detail":str(e).strip("'")})
-    # return back
 
 @app.get("/result/{task_id}")
 def get_result(task_id: str):
