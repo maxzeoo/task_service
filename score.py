@@ -1,11 +1,13 @@
 #no_null 口径：双无 —— 地点和对象同时为"无"时判失败；只有一个为"无"仍算通过
 import requests
+import time
 from pathlib import Path
 import sys
 import json
 
 file_path = Path(__file__).resolve().parent / "golden.jsonl"
 url="http://127.0.0.1:8000/tasks"
+
 count=0
 all_count=0
 
@@ -25,11 +27,28 @@ with open(file_path,encoding="utf-8") as f:
             print("返回的不是json格式")
             continue
 
-        code=req.status_code
+        tid =r['task_id']
+        death=time.time()+60
+        item={"status":"pending"}
+        GET=f"http://127.0.0.1:8000/result/{tid}"
         exp=d["expect"]
         all_count+=1
         zero=0
         error=0
+
+        while item.get("status")=="pending" and time.time()<death:
+            respose = requests.get(GET)
+            item=respose.json()
+            time.sleep(2)
+        if item["status"]=="done":
+            tag="ok"
+        elif item["status"]=="failed" and "错误原因" in item["error"]:
+            tag="refuse"
+        elif item["status"]=="failed"and "错误原因" not in item["error"]:
+            tag="fail"
+        else:
+            tag="timeout"
+
 
         if "tasks" in r:
             for t in r["tasks"]:
@@ -39,20 +58,29 @@ with open(file_path,encoding="utf-8") as f:
                     error+=1
 
         if exp=="400":
-            ok =(code==400)
+            ok =(tag=="refuse")
         elif exp=="200":
-            ok=(code==200) and error==0     
+            ok=(tag=="ok") and error==0     
         else:
-            ok=(code==200) and zero==0
+            ok=(tag=="ok") and zero==0
+
+        if tag=="timeout":
+            y='timeout'
+        if tag=='refuse':
+            y='refuse'
+        if tag=="fail":
+            y='fail'
+        if tag=='ok' and zero>0:
+            y='no_null'
+        if tag=='ok' and zero==0:
+            y='200'
 
         if ok:
             count+=1
-            print(f"第{all_count}条成功")
-            print(req.text)
+            print(f"{all_count} 通过 {exp}")
         else:
-            print(f"第{all_count}条失败，期望：{exp}，实际：{code}")
-            print(req.text)
-    print(f"通过 {count}/{all_count}")
+            print(f"{all_count} 不通过 expect={exp} 实际={y}")
+    print(f"{count}/{all_count}")
 
 
         
